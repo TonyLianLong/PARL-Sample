@@ -1,6 +1,7 @@
 #coding:UTF-8
 #rainBow版flappy-bird
 import numpy as np
+import datetime
 from flappy_bird.BirdDuelingModel import BirdDuelingModel
 from flappy_bird.BirdPriorityAgent import BirdPriorityAgent
 from rpm.PriorityCNNRpm import PriorityCNNRpm, Experience
@@ -15,6 +16,10 @@ import matplotlib.pyplot as plt
 import os
 import sys
 sys.path.append("game/")
+
+log_dir = datetime.datetime.now().strftime("%m%d%Y_%H%M%S")
+os.makedirs(log_dir, exist_ok=True)
+logger.set_dir(log_dir)
 
 #=========可调节的超参数 start=========
 
@@ -147,6 +152,7 @@ def save(agent):
     learnDir = os.path.join(logger.get_dir(),'learn')
     predictDir = os.path.join(logger.get_dir(),'predict')
     agent.save_params(learnDir,predictDir)
+    
 
 #恢复模型
 def restore(agent):
