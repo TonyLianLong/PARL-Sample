@@ -1,6 +1,7 @@
 #coding:UTF-8
 
 import numpy as np
+import datetime
 from flappy_bird.BirdModel import BirdModel
 from flappy_bird.BirdAgent import BirdAgent
 from flappy_bird.replay_memory import ReplayMemory, Experience
@@ -217,7 +218,7 @@ def train():
     plt.xlabel('TrainEpisode')
     plt.ylabel('AvgReward')
     plt.plot(X,learning_curve)
-    plt.show()
+    plt.savefig(datetime.datetime.now().strftime("%m%d%Y_%H%M%S"))
 
 #测试
 def test():

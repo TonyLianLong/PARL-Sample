@@ -68,8 +68,8 @@ class PDDQN(Algorithm):
         """ sync weights of self.model to self.target_model
         """
         decay = 1.0 - self.tau
-
-        # Similar to momentum
+        
+        # Decay is similar to momentum
         self.model.sync_weights_to(
             self.target_model,
             decay=decay,
