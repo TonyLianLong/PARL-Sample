@@ -7,6 +7,10 @@ from parl import layers
 IMAGE_SIZE = (84, 84)
 CONTEXT_LEN = 4
 
+HARD_SYNC = False
+
+print("Hard Syncind mode is: ", HARD_SYNC)
+
 #智能体
 class BirdPriorityAgent(parl.Agent):
     def __init__(self, algorithm, action_dim):
@@ -83,13 +87,17 @@ class BirdPriorityAgent(parl.Agent):
     
     #学习
     def learn(self, obs, act, reward, next_obs, terminal,weight):
-        if self.global_step == 0:
-            print("Hard syncing model. Step: {}".format(self.global_step))
-            self.alg.sync_target_hard()
-        # elif self.global_step % self.update_target_steps == 0:
-        else: # soft syncing at every step
-            # print("Soft syncing model. Step: {}".format(self.global_step))
-            self.alg.sync_target_soft()
+        if HARD_SYNC:
+            if self.global_step % self.update_target_steps == 0:
+                print("[HARD SYNC] Hard syncing model. Step: {}".format(self.global_step))
+                self.alg.sync_target_hard()
+        else:
+            if self.global_step == 0:
+                print("[INIT HARD SYNC] Hard syncing model. Step: {}".format(self.global_step))
+                self.alg.sync_target_hard()
+            else: # soft syncing at every step
+                # print("Soft syncing model. Step: {}".format(self.global_step))
+                self.alg.sync_target_soft()
         
         self.global_step += 1
 

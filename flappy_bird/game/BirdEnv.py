@@ -23,7 +23,7 @@ PLAYER_INDEX_GEN = cycle([0, 1, 2, 1])
 class BirdEnv(gym.Env):
     
     def beforeInit(self):
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
+        # os.environ["SDL_VIDEODRIVER"] = "dummy"
         pygame.display.init()
         # pygame.init()
         self.FPSCLOCK = pygame.time.Clock()
