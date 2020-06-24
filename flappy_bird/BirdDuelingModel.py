@@ -1,8 +1,8 @@
 #coding:utf-8
-import parl.layers as layers
-from parl.framework.model_base import Model
+from parl import layers
+import parl
 import paddle.fluid as fluid
-class BirdDuelingModel(Model):
+class BirdDuelingModel(parl.Model):
     def __init__(self, act_dim):
         self.act_dim = act_dim
         #padding方式为valid

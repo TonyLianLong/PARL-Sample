@@ -1,9 +1,10 @@
 #coding:UTF-8
 #Double_Prioritized_DQN 继承自PARL官方的Algorithm
 import paddle.fluid as fluid
-from parl.framework.algorithm_base import Algorithm
-import parl.layers as layers
+import parl
+from parl import layers
 import copy
+from parl.core.fluid.algorithm import Algorithm
 
 __all__ = ['PDDQN']
 
@@ -13,7 +14,7 @@ def fluid_argmax(x):
 
 class PDDQN(Algorithm):
     def __init__(self, model, hyperparas):
-        Algorithm.__init__(self, model, hyperparas)
+        Algorithm.__init__(self, model)
         self.model = model
         self.target_model = copy.deepcopy(model)
         self.action_dim = hyperparas['action_dim']

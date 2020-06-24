@@ -237,7 +237,8 @@ def test():
     
 if __name__ == '__main__':
     print("train or test ?")
-    mode=input()
+    # mode=input()
+    mode = "train"
     print(mode)
     if mode=='train':
         train()

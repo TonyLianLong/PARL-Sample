@@ -1,14 +1,14 @@
 #coding:utf-8
 import numpy as np
 import paddle.fluid as fluid
-import parl.layers as layers
-from parl.framework.agent_base import Agent
+import parl
+from parl import layers
 
 IMAGE_SIZE = (84, 84)
 CONTEXT_LEN = 4
 
 #智能体
-class BirdPriorityAgent(Agent):
+class BirdPriorityAgent(parl.Agent):
     def __init__(self, algorithm, action_dim):
         super(BirdPriorityAgent, self).__init__(algorithm)
         
