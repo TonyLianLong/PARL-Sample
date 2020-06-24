@@ -4,7 +4,7 @@ import numpy as np
 from flappy_bird.BirdDuelingModel import BirdDuelingModel
 from flappy_bird.BirdPriorityAgent import BirdPriorityAgent
 from rpm.PriorityCNNRpm import PriorityCNNRpm, Experience
-from eight_puzzle.rainbow.pddqn import PDDQN
+from flappy_bird.rainbow.pddqn import PDDQN
 from tqdm import tqdm
 from flappy_bird.utils import resizeBirdrToAtari
 import time
@@ -28,7 +28,11 @@ CONTEXT_LEN = 4
 MEMORY_SIZE = int(1e5)
 
 #充满replay-memory,使其达到warm-up-size才开始训练
-MEMORY_WARMUP_SIZE = MEMORY_SIZE//20
+if True:
+    print("**Fast memory warmup is enabled**")
+    MEMORY_WARMUP_SIZE = MEMORY_SIZE//500
+else:
+    MEMORY_WARMUP_SIZE = MEMORY_SIZE//20
 
 #默认不跳帧
 FRAME_SKIP = None

@@ -2,6 +2,7 @@
 from parl import layers
 import parl
 import paddle.fluid as fluid
+
 class BirdDuelingModel(parl.Model):
     def __init__(self, act_dim):
         self.act_dim = act_dim

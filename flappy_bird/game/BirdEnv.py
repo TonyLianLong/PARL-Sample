@@ -10,6 +10,8 @@ from flappy_bird.game import flappy_bird_utils
 from pygame.locals import *
 from itertools import cycle
 
+import os
+
 FPS = 30
 SCREENWIDTH  = 288
 SCREENHEIGHT = 512
@@ -21,7 +23,9 @@ PLAYER_INDEX_GEN = cycle([0, 1, 2, 1])
 class BirdEnv(gym.Env):
     
     def beforeInit(self):
-        pygame.init()
+        os.environ["SDL_VIDEODRIVER"] = "dummy"
+        pygame.display.init()
+        # pygame.init()
         self.FPSCLOCK = pygame.time.Clock()
         self.SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
         pygame.display.set_caption('PaddlePaddle-Flappy-Bird')
