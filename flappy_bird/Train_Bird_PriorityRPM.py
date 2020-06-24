@@ -43,6 +43,8 @@ UPDATE_FREQ = 2
 #衰减因子
 GAMMA = 0.99
 
+TAU = 0.99
+
 #学习率
 LEARNING_RATE = 1e-3 * 0.2
 
@@ -160,7 +162,8 @@ def init_environment():
     hyperparas = {
         'action_dim': action_dim,
         'lr': LEARNING_RATE,
-        'gamma': GAMMA
+        'gamma': GAMMA,
+        'tau': TAU
     }
     model = BirdDuelingModel(action_dim)
     algorithm = PDDQN(model, hyperparas)

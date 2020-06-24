@@ -83,8 +83,14 @@ class BirdPriorityAgent(parl.Agent):
     
     #学习
     def learn(self, obs, act, reward, next_obs, terminal,weight):
-        if self.global_step % self.update_target_steps == 0:
-            self.alg.sync_target(self.gpu_id)
+        if self.global_step == 0:
+            print("Hard syncing model. Step: {}".format(self.global_step))
+            self.alg.sync_target_hard()
+        # elif self.global_step % self.update_target_steps == 0:
+        else: # soft syncing at every step
+            # print("Soft syncing model. Step: {}".format(self.global_step))
+            self.alg.sync_target_soft()
+        
         self.global_step += 1
 
         act = np.expand_dims(act, -1)

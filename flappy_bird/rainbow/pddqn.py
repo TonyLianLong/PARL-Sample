@@ -20,6 +20,7 @@ class PDDQN(Algorithm):
         self.action_dim = hyperparas['action_dim']
         self.gamma = hyperparas['gamma']
         self.lr = hyperparas['lr']
+        self.tau = hyperparas['tau']
 
     def define_predict(self, obs):
         return self.model.value(obs)
@@ -58,5 +59,21 @@ class PDDQN(Algorithm):
         optimizer.minimize(cost)
         return cost,newTd
 
+    """
     def sync_target(self, gpu_id):
+        self.model.sync_weights_to(self.target_model)
+    """
+
+    def sync_target_soft(self):
+        """ sync weights of self.model to self.target_model
+        """
+        decay = 1.0 - self.tau
+
+        # Similar to momentum
+        self.model.sync_weights_to(
+            self.target_model,
+            decay=decay,
+            share_vars_parallel_executor=None)
+
+    def sync_target_hard(self):
         self.model.sync_weights_to(self.target_model)
