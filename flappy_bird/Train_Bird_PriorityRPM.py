@@ -28,7 +28,7 @@ CONTEXT_LEN = 4
 MEMORY_SIZE = int(1e5)
 
 #充满replay-memory,使其达到warm-up-size才开始训练
-if True:
+if False:
     print("**Fast memory warmup is enabled**")
     MEMORY_WARMUP_SIZE = MEMORY_SIZE//500
 else:
